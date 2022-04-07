@@ -1,1 +1,7 @@
+local Player = game.Players.LocalPlayer
+local haxx = Player.PlayerGui.Menu.Menu.TopButtons.Buttons.Bosses.Button
 
+
+haxx.Text = "Exploits"
+if haxx.Visible = true then
+  
