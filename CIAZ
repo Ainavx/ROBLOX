@@ -163,6 +163,7 @@ Uis.InputBegan:Connect(function(Key)
                 if MousePressed ~= true then MousePressed = true end 
                 local Target;Target = GetNearestTarget()
                 if Target ~= nil then 
+                    AimlockTarget = Target
                 end
             end)
         end
