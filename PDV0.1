@@ -1625,11 +1625,21 @@ Fullbright.MouseButton1Click:Connect(function()
 
         game.Lighting.OutdoorAmbient = Color3.fromRGB(226, 211, 1)
     end)
-game:GetService("UserInputService").InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.Backquote then
-		if MadeByNyko8409.Enabled = false then do
-        MadeByNyko8409.Enabled = true elseif
-        MadeByNyko8409.Enabled = true then do
-        MadeByNyko8409.Enabled = false
-	end	
-end)
+game:GetService("UserInputService").InputBegan:Connect(
+    function(input)
+        if input.KeyCode == Enum.KeyCode.Backquote then
+            do
+                if MadeByNyko8409.Enabled == false then
+                    do
+                        MadeByNyko8409.Enabled = true
+                        if MadeByNyko8409.Enabled == true then
+                            do
+                                MadeByNyko8409.Enabled = false
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+)
