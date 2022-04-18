@@ -1414,8 +1414,7 @@ ImGoingInsane.Active = true
 
 -- Button functions
 
-Aimlock.MouseButton1Click:connect(
-    function()
+Aimlock.MouseButton1Click:connect(function()
         local LPlayer = game.Players.LocalPlayer
 
         local camera = workspace.CurrentCamera
@@ -1477,24 +1476,19 @@ Aimlock.MouseButton1Click:connect(
             aimkeylol = aimkeylol
         end
 
-        uis.InputBegan:Connect(
-            function(input)
+        uis.InputBegan:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton2 then
                     isAiming = true
                 end
-            end
-        )
+            end)
 
-        uis.InputEnded:Connect(
-            function(input)
+        uis.InputEnded:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton2 then
                     isAiming = false
                 end
-            end
-        )
+            end)
 
-        LPlayer:GetMouse().KeyDown:Connect(
-            function(key)
+        LPlayer:GetMouse().KeyDown:Connect(function(key)
                 if key == "e" then
                     if aimcheck == true then
                         aimcheck = false
@@ -1504,8 +1498,7 @@ Aimlock.MouseButton1Click:connect(
                         end
                     end
                 end
-            end
-        )
+            end)
 
         if dafov.Text == nil then
             local FOV = 800
@@ -1515,8 +1508,7 @@ Aimlock.MouseButton1Click:connect(
             local FOV = 800
         end
 
-        rs.RenderStepped:connect(
-            function()
+        rs.RenderStepped:connect(function()
                 local t = closestPlayer(FOV)
 
                 if t and isAiming and aimcheck == true then
@@ -1524,11 +1516,9 @@ Aimlock.MouseButton1Click:connect(
                 end
             end
         )
-    end
-)
+    end)
 
-Aim.MouseButton1Click:connect(
-    function()
+Aim.MouseButton1Click:Connect(function()
         AimBack.Visible = true
 
         CreditBack.Visible = false
@@ -1538,11 +1528,9 @@ Aim.MouseButton1Click:connect(
         SettingsBack.Visible = false
 
         VisualBack.Visible = false
-    end
-)
+    end)
 
-Credit.MouseButton1Click:connect(
-    function()
+Credit.MouseButton1Click:Connect(function()
         AimBack.Visible = false
 
         CreditBack.Visible = true
@@ -1552,11 +1540,9 @@ Credit.MouseButton1Click:connect(
         SettingsBack.Visible = false
 
         VisualBack.Visible = false
-    end
-)
+    end)
 
-Misc.MouseButton1Click:connect(
-    function()
+Misc.MouseButton1Click:Connect(function()
         AimBack.Visible = false
 
         CreditBack.Visible = false
@@ -1566,11 +1552,9 @@ Misc.MouseButton1Click:connect(
         SettingsBack.Visible = false
 
         VisualBack.Visible = false
-    end
-)
+    end)
 
-Settings.MouseButton1Click:connect(
-    function()
+Settings.MouseButton1Click:Connect(function()
         AimBack.Visible = false
 
         CreditBack.Visible = false
@@ -1580,11 +1564,9 @@ Settings.MouseButton1Click:connect(
         SettingsBack.Visible = true
 
         VisualBack.Visible = false
-    end
-)
+    end)
 
-Visual.MouseButton1Click:connect(
-    function()
+Visual.MouseButton1Click:Connect(function()
         AimBack.Visible = false
 
         CreditBack.Visible = false
@@ -1594,11 +1576,9 @@ Visual.MouseButton1Click:connect(
         SettingsBack.Visible = false
 
         VisualBack.Visible = true
-    end
-)
+    end)
 
-ItemToggle.MouseButton1Click:Connect(
-    function()
+ItemToggle.MouseButton1Click:Connect(function()
         local item = ItemHere.Text
 
         for i, Vania in pairs(game.Workspace.Containers:GetDescendants()) do
@@ -1634,19 +1614,14 @@ ItemToggle.MouseButton1Click:Connect(
                 TextL.Font = "Highway"
             end
         end
-    end
-)
+    end)
 
-Visor.MouseButton1Click:Connect(
-    function()
+Visor.MouseButton1Click:Connect(function()
         game:GetService("Players").LocalPlayer.PlayerGui.MainGui.MainFrame.ScreenEffects.Visor:Destroy()
-    end
-)
+    end)
 
-Fullbright.MouseButton1Click:Connect(
-    function()
+Fullbright.MouseButton1Click:Connect(function()
         game.Lighting.GlobalShadows = false
 
         game.Lighting.OutdoorAmbient = Color3.fromRGB(226, 211, 1)
-    end
-)
+    end)
