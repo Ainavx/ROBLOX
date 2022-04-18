@@ -1450,23 +1450,20 @@ end
 
 local isAiming = false
 local aimcheck = false
-uis.InputBegan:Connect(
-    function(input)
+uis.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton2 then
             isAiming = true
         end
     end
 )
-uis.InputEnded:Connect(
-    function(input)
+uis.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton2 then
             isAiming = false
         end
     end
 )
 
-LPlayer:GetMouse().KeyDown:Connect(
-    function(key)
+LPlayer:GetMouse().KeyDown:Connect(function(key)
         if key == "e" then
             if aimcheck == true then
                 aimcheck = false
@@ -1481,9 +1478,8 @@ LPlayer:GetMouse().KeyDown:Connect(
 
     local FOV = dafov.Text
 
-rs.RenderStepped:connect(
-    function()
-        local t = closestPlayer(FOV)
+rs.RenderStepped:connect(function()
+        local t = closestPlayer(fov)
         if t and isAiming and aimcheck == true then
             aimAt(t.Character.Head.Position, 2)
         end
