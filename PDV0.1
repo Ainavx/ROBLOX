@@ -1415,113 +1415,81 @@ ImGoingInsane.Active = true
 -- Button functions
 
 Aimlock.MouseButton1Click:connect(function()
-        local LPlayer = game.Players.LocalPlayer
+       local LPlayer = game.Players.LocalPlayer
+local camera = workspace.CurrentCamera
+local mouse = LPlayer:GetMouse()
+local players = game:GetService("Players")
+local rs = game:GetService("RunService")
+local uis = game:GetService("UserInputService")
 
-        local camera = workspace.CurrentCamera
-
-        local mouse = LPlayer:GetMouse()
-
-        local players = game:GetService("Players")
-
-        local rs = game:GetService("RunService")
-
-        local uis = game:GetService("UserInputService")
-
-        local function closestPlayer(fov)
-            local target = nil
-
-            local closest = fov or math.huge
-
-            for i, Nyko in ipairs(players:GetPlayers()) do
-                if Nyko.Character and LPlayer.Character and Nyko ~= LPlayer then
-                    local _, onscreen = camera:WorldToScreenPoint(Nyko.Character.Head.Position)
-
-                    if onscreen then
-                        local targetPos = camera:WorldToViewportPoint(Nyko.Character.Head.Position)
-
-                        local mousePos = camera:WorldToViewportPoint(mouse.Hit.p)
-
-                        local dist =
-                            (Vector2.new(mousePos.X, mousePos.Y) - Vector2.new(targetPos.X, targetPos.Y)).magnitude
-
-                        if dist < closest then
-                            closest = dist
-
-                            target = Nyko
-                        end
-                    end
+local function closestPlayer(fov)
+    local target = nil
+    local closest = fov or math.huge
+    for i, Nyko in ipairs(players:GetPlayers()) do
+        if Nyko.Character and LPlayer.Character and Nyko ~= LPlayer then
+            local _, onscreen = camera:WorldToScreenPoint(Nyko.Character.Head.Position)
+            if onscreen then
+                local targetPos = camera:WorldToViewportPoint(Nyko.Character.Head.Position)
+                local mousePos = camera:WorldToViewportPoint(mouse.Hit.p)
+                local dist = (Vector2.new(mousePos.X, mousePos.Y) - Vector2.new(targetPos.X, targetPos.Y)).magnitude
+                if dist < closest then
+                    closest = dist
+                    target = Nyko
                 end
             end
-
-            return target
         end
+    end
+    return target
+end
 
-        local function aimAt(pos, smooth)
-            local targetPos = camera:WorldToScreenPoint(pos)
+local function aimAt(pos, smooth)
+    local targetPos = camera:WorldToScreenPoint(pos)
+    local mousePos = camera:WorldToScreenPoint(mouse.Hit.p)
+    mousemoverel((targetPos.X - mousePos.X) / smooth, (targetPos.Y - mousePos.Y) / smooth)
+end
 
-            local mousePos = camera:WorldToScreenPoint(mouse.Hit.p)
-
-            mousemoverel((targetPos.X - mousePos.X) / smooth, (targetPos.Y - mousePos.Y) / smooth)
+local isAiming = false
+local aimcheck = false
+uis.InputBegan:Connect(
+    function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton2 then
+            isAiming = true
         end
-
-        local isAiming = false
-
-        local aimcheck = false
-
-        local aimkeylol = "e"
-
-        if aimkey.Text == nil then
-            aimkeylol = "e"
-        elseif aimkey.Text ~= nil then
-            aimkeylol = aimkeylol
+    end
+)
+uis.InputEnded:Connect(
+    function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton2 then
+            isAiming = false
         end
+    end
+)
 
-        uis.InputBegan:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton2 then
-                    isAiming = true
-                end
-            end)
-
-        uis.InputEnded:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton2 then
-                    isAiming = false
-                end
-            end)
-
-        LPlayer:GetMouse().KeyDown:Connect(function(key)
-                if key == "e" then
-                    if aimcheck == true then
-                        aimcheck = false
-                    else
-                        if aimcheck == false then
-                            aimcheck = true
-                        end
-                    end
-                end
-            end)
-          
-            local FOV = dafov.Text
-            
-        rs.RenderStepped:connect(function()
-                local t = closestPlayer(FOV)
-
-                if t and isAiming and aimcheck == true then
-                    aimAt(t.Character.Head.Position, 2)
+LPlayer:GetMouse().KeyDown:Connect(
+    function(key)
+        if key == "e" then
+            if aimcheck == true then
+                aimcheck = false
+            else
+                if aimcheck == false then
+                    aimcheck = true
                 end
             end
-        )
-    end)
+        end
+    end
+)
 
-Aim.MouseButton1Click:Connect(function()
-        AimBack.Visible = true
+    local FOV = dafov.Text
 
-        CreditBack.Visible = false
+rs.RenderStepped:connect(
+    function()
+        local t = closestPlayer(FOV)
+        if t and isAiming and aimcheck == true then
+            aimAt(t.Character.Head.Position, 2)
+        end
+    end
+)
 
-        MiscBack.Visible = false
-
-        SettingsBack.Visible = false
-
-        VisualBack.Visible = false
     end)
 
 Credit.MouseButton1Click:Connect(function()
