@@ -1539,6 +1539,18 @@ Visual.MouseButton1Click:Connect(function()
 
         VisualBack.Visible = true
     end)
+    
+    Aim.MouseButton1Click:Connect(function()
+        AimBack.Visible = true
+
+        CreditBack.Visible = false
+
+        MiscBack.Visible = false
+
+        SettingsBack.Visible = false
+
+        VisualBack.Visible = false
+    end)
 
 ItemToggle.MouseButton1Click:Connect(function()
         local item = ItemHere.Text
