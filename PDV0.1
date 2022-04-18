@@ -1413,7 +1413,7 @@ ImGoingInsane.Selectable = true
 ImGoingInsane.Active = true
 
 -- Button functions
-Aimlock.MouseButton1Click:connect(function()
+
 local LPlayer = game.Players.LocalPlayer
 local camera = workspace.CurrentCamera
 local mouse = LPlayer:GetMouse()
@@ -1485,7 +1485,6 @@ rs.RenderStepped:connect(
         end
     end
 )
-end)
 
 Credit.MouseButton1Click:Connect(function()
         AimBack.Visible = false
