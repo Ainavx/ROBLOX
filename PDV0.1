@@ -1414,8 +1414,7 @@ ImGoingInsane.Active = true
 
 -- Button functions
 
-Aimlock.MouseButton1Click:connect(function()
-       local LPlayer = game.Players.LocalPlayer
+local LPlayer = game.Players.LocalPlayer
 local camera = workspace.CurrentCamera
 local mouse = LPlayer:GetMouse()
 local players = game:GetService("Players")
@@ -1450,20 +1449,22 @@ end
 
 local isAiming = false
 local aimcheck = false
-uis.InputBegan:Connect(function(input)
+uis.InputBegan:Connect(
+    function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton2 then
             isAiming = true
         end
     end
 )
-uis.InputEnded:Connect(function(input)
+uis.InputEnded:Connect(
+    function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton2 then
             isAiming = false
         end
     end
 )
-
-LPlayer:GetMouse().KeyDown:Connect(function(key)
+LPlayer:GetMouse().KeyDown:Connect(
+    function(key)
         if key == "e" then
             if aimcheck == true then
                 aimcheck = false
@@ -1475,18 +1476,16 @@ LPlayer:GetMouse().KeyDown:Connect(function(key)
         end
     end
 )
-
-    local FOV = dafov.Text
-
-rs.RenderStepped:connect(function()
-        local t = closestPlayer(fov)
+local FOV = 800
+rs.RenderStepped:connect(
+    function()
+        local t = closestPlayer(FOV)
         if t and isAiming and aimcheck == true then
             aimAt(t.Character.Head.Position, 2)
         end
     end
 )
-
-    end)
+end)
 
 Credit.MouseButton1Click:Connect(function()
         AimBack.Visible = false
